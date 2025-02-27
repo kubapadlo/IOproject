@@ -1,0 +1,1 @@
+1. Wlaczenie cors w program.cs - konieczne aby nasze zadania przeszly przez zabezpieczenia

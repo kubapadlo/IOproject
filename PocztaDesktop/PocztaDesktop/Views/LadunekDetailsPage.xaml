@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocztaDesktop.Views.LadunekDetailsPage"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <StackLayout Padding="10" Spacing="20">
+        <!-- Logo na górze strony -->
+        <Image Source="logo.png" HeightRequest="100" HorizontalOptions="Center"/>
+
+        <!-- Nagłówek strony -->
+        <Label Text="Szczegóły Ładunku" TextColor="{DynamicResource TextColor}" FontSize="24" FontAttributes="Bold" Padding="10" HorizontalOptions="Center"/>
+
+        <!-- Id Samochodu -->
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Label Text="🚗 Samochód:" TextColor="{DynamicResource TextColor}" FontSize="18" VerticalOptions="Center"/>
+            <Label x:Name="SamochodLabel" TextColor="{DynamicResource TextColor}" FontSize="18" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <!-- Status -->
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Label Text="📦 Status:" TextColor="{DynamicResource TextColor}" FontSize="18" VerticalOptions="Center"/>
+            <Label x:Name="StatusLabel" TextColor="{DynamicResource TextColor}" FontSize="18" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <!-- Tabela paczek -->
+        <Label Text="📋 Lista Paczek" TextColor="{DynamicResource TextColor}" FontSize="20" FontAttributes="Bold" Padding="10,20,0,10"/>
+        <Grid RowSpacing="10" ColumnSpacing="10">
+            <!-- Nagłówki kolumn -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Nagłówki tabelki -->
+            <Label Text="ID Paczki" TextColor="{DynamicResource TextColor}" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="0"/>
+            <Label Text="Data Nadania" TextColor="{DynamicResource TextColor}" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="1"/>
+            <Label Text="Zniszczona" TextColor="{DynamicResource TextColor}" FontSize="16" FontAttributes="Bold" Grid.Row="0" Grid.Column="2"/>
+
+            <!-- Dane tabelki -->
+            <Label Text="1" TextColor="{DynamicResource TextColor}" FontSize="16" Grid.Row="1" Grid.Column="0"/>
+            <Label Text="2025-01-15" TextColor="{DynamicResource TextColor}" FontSize="16" Grid.Row="1" Grid.Column="1"/>
+            <Label Text="Nie" TextColor="{DynamicResource TextColor}" FontSize="16" Grid.Row="1" Grid.Column="2"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>

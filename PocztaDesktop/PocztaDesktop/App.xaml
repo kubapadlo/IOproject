@@ -1,0 +1,41 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PocztaDesktop"
+             x:Class="PocztaDesktop.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <!-- Motywy -->
+            <Color x:Key="LightBackgroundColor">#add8e6</Color>
+            <Color x:Key="LightTextColor">#000000</Color>
+            <Color x:Key="LightPlaceholderText">#353535</Color>
+            <Color x:Key="LightPlaceholderBackground">#FFFFFF</Color>
+            <Color x:Key="LightButtonBackground">#112634</Color>
+            <Color x:Key="LightButtonText">#FFFFFF</Color>
+            
+            <Color x:Key="DarkBackgroundColor">#321D2F</Color>
+            <Color x:Key="DarkTextColor">#FFFFFF</Color>
+            <Color x:Key="DarkPlaceholderText">#3D2E4F</Color>
+            <Color x:Key="DarkPlaceholderBackground">#696969</Color>
+            <Color x:Key="DarkButtonBackground">#3A607A</Color>
+            <Color x:Key="DarkButtonText">#000000</Color>
+
+            <!-- Dynamiczne zasoby -->
+            <Color x:Key="BackgroundColor">#FFFFFF</Color>
+            <Color x:Key="TextColor">#000000</Color>
+            <Color x:Key="ListViewBackgroundColor">#F5F5F5</Color>
+            <!-- Tło listy -->
+            <Color x:Key="SeparatorColor">#E0E0E0</Color>
+            <!-- Kolor separatora -->
+        </ResourceDictionary>
+
+        <!-- Globalne dynamiczne zasoby -->
+        <ResourceDictionary>
+            <Color x:Key="BackgroundColor" >#FFFFFF</Color>
+            <Color x:Key="TextColor">#000000</Color>
+            <Color x:Key="Primary">#6200EE</Color>
+        </ResourceDictionary>
+    
+    </Application.Resources>
+</Application>

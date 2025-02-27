@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocztaDesktop.Views.ParcelsPage"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:views="clr-namespace:PocztaDesktop.Views"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+    <Grid RowDefinitions="Auto, Auto, Auto, *" ColumnDefinitions="*, Auto" Margin="10,0,10,0">
+        <!-- Logo
+        <Image Source="warehouse_logo.png" Grid.Row="0" Grid.Column="0" WidthRequest="100" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start"/> -->
+
+        <!-- Filters -->
+        <Frame CornerRadius="10" BackgroundColor="#9AB4BD" HorizontalOptions="Start" MaximumWidthRequest="500" MaximumHeightRequest="50" Padding="10"  HasShadow="True">
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                <CheckBox x:Name="FilterGabaryt" />
+                <Label Text="Gabaryt" VerticalOptions="Center" FontSize="13"/>
+                <DatePicker x:Name="FilterDatePicker" 
+                    Format="yyyy-MM-dd" 
+                    Date="{Binding SelectedDate, Mode=TwoWay}" 
+                    MinimumDate="2000-01-01" 
+                    MaximumDate="{x:Static sys:DateTime.Today}" 
+                    HorizontalOptions="Start" />
+                <Label Text="Data Nadania" VerticalOptions="Center" FontSize="13"/>
+                <CheckBox x:Name="FilterCzyZniszczona" />
+                <Label Text="Zniszczone" VerticalOptions="Center" FontSize="13"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Column Headers -->
+        <Grid Grid.Row="2" ColumnDefinitions="Auto, *, *, *, *, *, *, *, *, *" RowSpacing="0" ColumnSpacing="1">
+            <Label Grid.Column="0" Text="ID" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="1" Text="Gabaryt" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="2" Text="Kod Nadawcy" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="3" Text="Kod Odbiorcy" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="4" Text="Dane Nadawcy" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="5" Text="Dane Odbiorcy" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="6" Text="Data Nadania" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="7" Text="Status" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="8" Text="Czy Zniszczona" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+        </Grid>
+
+        <!-- Package Table -->
+        <CollectionView x:Name="ParcelsCollectionView" Grid.Row="3" Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Packages}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5" ColumnDefinitions="Auto, *, *, *, *, *, *, *, *, *" RowSpacing="0" ColumnSpacing="1">
+                        <Label Grid.Column="0" Text="{Binding IdPaczki}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="1" Text="{Binding Gabaryt}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="2" Text="{Binding KodPocztowyNadawcy}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="3" Text="{Binding KodPocztowyOdbiorcy}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="4" Text="{Binding DaneNadawcy}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="5" Text="{Binding DaneOdbiorcy}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="6" Text="{Binding DataNadania}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="7" Text="{Binding Status}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="8" Text="{Binding CzyZniszczona}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+
+                        <Button Grid.Column="9" Text="Usuń" BackgroundColor="#8B0000" TextColor="#FFFFFF" Clicked="OnDeletePackageClicked" CommandParameter="{Binding IdPaczki}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Załaduj paczki" Margin="10" FontFamily="Helvetica"  TextColor="{DynamicResource ButtonTextColor}" BackgroundColor="{DynamicResource ButtonColor}"
+                WidthRequest="200" HorizontalOptions="Center" VerticalOptions="End" Clicked="LoadParcelsButton_Clicked" />
+
+        <!-- Floating Action Button (FAB) -->
+        <Button Text="+" BackgroundColor="Green" TextColor="White"
+                WidthRequest="60" HeightRequest="60" CornerRadius="30"
+                HorizontalOptions="End" VerticalOptions="End"
+                Margin="20" Clicked="Button_Clicked"/>
+    </Grid>
+</ContentPage>

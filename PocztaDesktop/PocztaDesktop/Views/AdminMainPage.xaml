@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocztaDesktop.Views.AdminMainPage"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <Grid>
+        <!-- Login i uprawnienia w prawym górnym rogu -->
+        <StackLayout Orientation="Vertical" 
+                     VerticalOptions="Start" 
+                     HorizontalOptions="End"
+                     Margin="0,0,30,0"
+                     Padding="10">
+            
+            <Label x:Name="UserLoginLabel" FontAttributes="Bold" Text="Login: " FontSize="15" TextColor="Gray" />
+            <Label x:Name="UserPermissionLabel" FontAttributes="Bold" Text="Uprawnienia: " FontSize="15" TextColor="Gray" />
+        </StackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="30">
+                <!-- Logo firmy -->
+                <Image Source="kotek.png" HeightRequest="250" HorizontalOptions="Center" />
+
+                <!-- Sekcja kafelków -->
+                <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" RowSpacing="20" ColumnSpacing="20">
+                    <!-- Kafelek Pracownicy -->
+                    <Frame x:Name="ramka" BackgroundColor="#556B2F" CornerRadius="10" Padding="10">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                            <Image Source="pracownicy_icon.png" WidthRequest="50" HeightRequest="50" />
+                            <Label Text="Pracownicy" FontSize="18" TextColor="White" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEmployeesTapped" x:Name="EmployeeTap" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <!-- Kafelek Magazyn -->
+                    <Frame BackgroundColor="#CD5C5C" CornerRadius="10" Padding="10" Grid.Column="1">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                            <Image Source="magazyn_icon.png" WidthRequest="50" HeightRequest="50" />
+                            <Label Text="Magazyn" FontSize="18" TextColor="White" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnWarehouseTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <!-- Kafelek Ustawienia -->
+                    <Frame BackgroundColor="#FF5722" CornerRadius="10" Padding="10" Grid.Column="2">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                            <Image Source="settings_icon.png" WidthRequest="50" HeightRequest="50" />
+                            <Label Text="Ustawienia" FontSize="18" TextColor="White" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSettingsTapped" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

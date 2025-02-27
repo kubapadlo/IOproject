@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocztaDesktop.Views.AddEmployeeForm"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Dodaj nowego użytkownika" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" />
+
+            <Entry Placeholder="Imię" BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="NameEntry" />
+            <Entry Placeholder="Nazwisko" BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="SurnameEntry" />
+            <Entry Placeholder="Adres" BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="AddressEntry" />
+            <Entry Placeholder="Nr telefonu" BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="PhoneEntry" Keyboard="Telephone" />
+            <Entry Placeholder="Login" BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="LoginEntry" />
+            <Entry Placeholder="Hasło" BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="PasswordEntry" IsPassword="True" />
+            <Entry Placeholder="ID Uprawnienia" BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="PermissionIdEntry" Keyboard="Numeric" />
+
+            <Button Text="Zapisz" WidthRequest="200" HorizontalOptions="Center" BackgroundColor="{DynamicResource ButtonColor}" TextColor="{DynamicResource ButtonTextColor}" Clicked="SaveEmployeeButton_Clicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

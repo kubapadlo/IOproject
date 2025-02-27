@@ -1,0 +1,24 @@
+MVVM DATA BINDING:
+
+1.FOLER ViewModel, plik MainViewModel.cs
+
+public class MainViewModel
+{
+    public string message { get; set; }
+    public MainViewModel()
+    {
+         message = "wiadomosc";
+    }
+}
+
+2. MainPage.xaml
+
+<Label Text="{Binding message}"
+
+3. MainPage.xaml.cs
+
+public MainPage()
+{
+    InitializeComponent();
+    BindingContext = new MainViewModel();
+}

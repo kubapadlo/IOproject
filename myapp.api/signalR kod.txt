@@ -1,0 +1,95 @@
+Controllers/DatabaseWatcher.cs:
+
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.DependencyInjection;
+using myapp.api.Data;
+using myapp.api.Hubs;
+using Microsoft.EntityFrameworkCore;
+
+public class DatabaseWatcher
+{
+    private readonly IHubContext<DatabaseHub> _hubContext;
+    private readonly IServiceScopeFactory _scopeFactory;
+    
+    public DatabaseWatcher(IHubContext<DatabaseHub> hubContext, IServiceScopeFactory scopeFactory)
+    {
+        _hubContext = hubContext;
+        _scopeFactory = scopeFactory;
+    }
+
+    public async Task StartWatching(CancellationToken cancellationToken)
+    {
+        string lastValue = "";
+
+        while (!cancellationToken.IsCancellationRequested)
+        {
+            // Utwórz nowy zakres i uzyskaj instancję AppDbContext
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                string currentValue = await GetDatabaseValueAsync(dbContext);
+
+                if (currentValue != lastValue)
+                {
+                    lastValue = currentValue;
+                    await _hubContext.Clients.All.SendAsync("ReceiveUpdate", currentValue);
+                }
+            }
+
+            await Task.Delay(10000); // Sprawdzaj co sekundę
+        }
+    }
+     
+
+    private async Task<string> GetDatabaseValueAsync(AppDbContext dbContext)
+    {
+        // Liczba rekordów w tabeli Paczki
+        int count = await dbContext.Paczkis.CountAsync();
+        return count.ToString();
+    }
+    
+}
+
+
+
+Hubs/DatabaseHub.cs :
+
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using myapp.api.Data;
+
+namespace myapp.api.Hubs
+{ 
+    public class DatabaseHub : Hub
+    {
+        private readonly IServiceScopeFactory _scopeFactory;
+
+        public DatabaseHub(IServiceScopeFactory scopeFactory)
+        {
+            _scopeFactory = scopeFactory;
+        }
+
+        public async Task<string> GetCurrentValue()
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                int count = await dbContext.Paczkis.CountAsync();
+                return count.ToString();
+            }
+        }
+    }
+
+}
+
+
+program.cs:
+
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<DatabaseWatcher>();
+
+var watcher = app.Services.GetRequiredService<DatabaseWatcher>();
+var cts = new CancellationTokenSource();
+Task.Run(() => watcher.StartWatching(cts.Token));
+
+app.MapHub<DatabaseHub>("/databaseHub");// Ustaw endpoint SignalR

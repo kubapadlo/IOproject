@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:PocztaDesktop.Converters"
+             x:Class="PocztaDesktop.Views.EmployesList"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <converters:PermissionConverter x:Key="PermissionConverter" />
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="Auto, Auto, *" ColumnDefinitions="*, Auto" Margin="10,0,10,0">
+        <!-- Logo -->
+        <Image Source="kotek.png" Grid.Row="0" Grid.Column="0" WidthRequest="100" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start"/>
+
+        <!-- Column Headers -->
+        <Grid Grid.Row="1"  ColumnDefinitions="Auto, *, *, *, *, *, *, *, *" RowSpacing="0" ColumnSpacing="1">
+            <!-- Nagłówki -->
+            <Label Grid.Column="0" Text="ID" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="1" Text="Imię" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="2" Text="Nazwisko" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="3" Text="Adres" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="4" Text="Nr Telefonu" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="5" Text="Login" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="6" Text="Hasło" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+            <Label Grid.Column="7" Text="ID Uprawnienia" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+        </Grid>
+
+        <!-- Employee Table -->
+        <CollectionView x:Name="EmployeeCollectionView" Grid.Row="2" Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Employees}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5" ColumnDefinitions="Auto, *, *, *, *, *, *, *, *" RowSpacing="0" ColumnSpacing="1">
+                        <!-- Dane z marginesem wewnętrznym -->
+                        <Label Grid.Column="0" Text="{Binding IdPracownika}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="1" Text="{Binding Imię}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="2" Text="{Binding Nazwisko}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="3" Text="{Binding Adres}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="4" Text="{Binding NrTelefonu}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="5" Text="{Binding Login}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="6" Text="{Binding Hasło}" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+                        <Label Grid.Column="7" Text="{Binding IdUprawnienia, Converter={StaticResource PermissionConverter}}"  TextColor="{DynamicResource TextColor}" VerticalOptions="Center" HorizontalOptions="Center" Padding="5,0"/>
+
+                        <Button Grid.Column="8" Text="Usuń" 
+                                Clicked="OnDeleteEmployeeClicked"
+                                CommandParameter="{Binding IdPracownika}"
+                                BackgroundColor="#8B0000" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Załaduj pracowników" 
+        TextColor="{DynamicResource ButtonTextColor}" 
+        Margin="10" 
+        BackgroundColor="{DynamicResource ButtonColor}"
+        FontFamily="Helvetica" 
+        WidthRequest="200" 
+        HorizontalOptions="Center"
+        VerticalOptions="End" 
+        Clicked="LoadEmployeesButton_Clicked" />
+
+        <!-- Floating Action Button (FAB) -->
+        <Button Text="+" BackgroundColor="Green" TextColor="White" FontSize="30"
+                WidthRequest="60" HeightRequest="60" CornerRadius="30"
+                HorizontalOptions="End" VerticalOptions="End"
+                Margin="10" Clicked="Button_Clicked"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocztaDesktop.Views.LogingPage"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <Grid>
+        <!-- Tło strony -->
+        <Image Source="background2.jpg" 
+               Aspect="AspectFill" 
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+
+        <!-- Główna zawartość -->
+        <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+            <!-- Logo -->
+            <Image Source="kotek.png" HeightRequest="200" WidthRequest="200" HorizontalOptions="Center" />
+
+            <!-- Nagłówek -->
+            <Label Text="Zaloguj się do systemu"
+                   FontSize="24" 
+                   TextColor="#284b63" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" />
+
+            <!-- Pole login -->
+            <Frame CornerRadius="10" Padding="0" BackgroundColor="#B9E5E880" HasShadow="False" HorizontalOptions="Center" WidthRequest="500">
+                <Entry x:Name="LoginEntry"
+                       Placeholder="Login" 
+                       PlaceholderColor="{DynamicResource PlaceholderColor}" 
+                       TextColor="{DynamicResource TextColor}" 
+                       BackgroundColor="#ffffff" 
+                       HeightRequest="50" />
+            </Frame>
+
+            <!-- Pole hasło -->
+            <Frame CornerRadius="10" Padding="0" BackgroundColor="#B9E5E880" HasShadow="False" HorizontalOptions="Center" WidthRequest="500">
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Hasło" 
+                       IsPassword="True" 
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"  
+                       TextColor="{DynamicResource TextColor}" 
+                       BackgroundColor="#ffffff" 
+                       HeightRequest="50" />
+            </Frame>
+
+            <!-- Przycisk logowania -->
+            <Button Text="Zaloguj się" 
+                    TextColor="White" 
+                    BackgroundColor="#3c6e71" 
+                    CornerRadius="10" 
+                    HeightRequest="50" 
+                    FontAttributes="Bold"
+                    Clicked="Button_Clicked"
+                    HorizontalOptions="Center"
+                    WidthRequest="200"/>
+
+            <Label x:Name="MessageLabel"
+                   TextColor="Red"
+                   IsVisible="False"/>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

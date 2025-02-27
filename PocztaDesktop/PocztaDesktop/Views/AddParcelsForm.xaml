@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocztaDesktop.Views.AddParcelsForm"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Dodaj nową przesyłkę" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" />
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                <Label Text="Gabaryt" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" />
+                <Switch x:Name="GabarytSwitch" />
+            </StackLayout>
+
+            <Entry Placeholder="Kod Pocztowy Nadawcy" BackgroundColor="{DynamicResource PlaceholderBackground}" x:Name="SenderPostalCodeEntry" />
+            <Entry Placeholder="Kod Pocztowy Odbiorcy" BackgroundColor="{DynamicResource PlaceholderBackground}" x:Name="RecipientPostalCodeEntry" />
+            <Entry Placeholder="Dane Nadawcy "  BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="SenderDetailsEntry" />
+            <Entry Placeholder="Dane Odbiorcy"  BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="RecipientDetailsEntry" />
+            <Entry Placeholder="Adres Nadawcy"  BackgroundColor="{DynamicResource PlaceholderBackground}"  x:Name="SenderAddressEntry" />
+            <Entry Placeholder="Adres Odbiorcy"  BackgroundColor="{DynamicResource PlaceholderBackground}" x:Name="RecipientAddressEntry" />
+
+            <Picker x:Name="StatusPicker"  BackgroundColor="{DynamicResource PlaceholderBackground}" Title="Status" TitleColor="{DynamicResource TextColor}">
+                <Picker.Items>
+                    <x:String>Nadana</x:String>
+                    <x:String>Przyjęta</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                <Label Text="Czy zniszczona" TextColor="{DynamicResource TextColor}" VerticalOptions="Center" />
+                <Switch x:Name="IsDamagedSwitch" />
+            </StackLayout>
+
+            <Button Text="Zapisz" WidthRequest="200" HorizontalOptions="Center" BackgroundColor="{DynamicResource ButtonColor}" TextColor="{DynamicResource ButtonTextColor}"  Clicked="SaveParcelButton_Clicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
